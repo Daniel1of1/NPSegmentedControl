@@ -49,6 +49,36 @@ public class NPSegmentedControl : UIControl {
         }
 
     }
+    
+    public var borderColor :UIColor?
+        {
+        didSet{
+            if self.currentIndex <= views.count - 1 && self.currentIndex >= 0
+            {
+                for index in 0..<views.count
+                {
+                        let view = views[index]
+                        view.layer.borderColor = self.borderColor!.CGColor
+                }
+            }
+        }
+    }
+    
+    public var borderWidth :Double?
+        {
+        didSet{
+            if self.currentIndex <= views.count - 1 && self.currentIndex >= 0
+            {
+                for index in 0..<views.count
+                {
+                    let view = views[index]
+                    view.layer.borderWidth = CGFloat(self.borderWidth!)
+                }
+            }
+        }
+    }
+
+
 
     private var animationChecks = [Bool]()
 
