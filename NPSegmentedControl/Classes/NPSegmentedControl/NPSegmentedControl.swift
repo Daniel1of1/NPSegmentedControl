@@ -357,6 +357,28 @@ public class NPSegmentedControl : UIControl {
 
     public func selectCell(index:Int, animate:Bool)
     {
+        if index == UISegmentedControlNoSegment {
+            let oldView = views[currentIndex]
+            let oldLabel = labels[currentIndex]
+            
+            UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 10, options: [UIViewAnimationOptions.CurveEaseInOut, UIViewAnimationOptions.AllowUserInteraction], animations:
+                {
+                    self.animationChecks.append(true)
+                    oldView.backgroundColor = self.unselectedColor
+                    oldLabel.textColor = self.unselectedTextColor
+                    if let font = self.unselectedFont
+                    {
+                        oldLabel.font = font
+                    }
+                },
+                completion: { finished in
+                    self.animationChecks.removeLast()
+                    
+            })
+            
+            return
+        }
+
         let newView = views[index]
         let newLabel = labels[index]
         let oldView = views[currentIndex]
